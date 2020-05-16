@@ -32,7 +32,7 @@ def Game():
     ai_option = randint(0,2)
     if(ai_option == 0):
         ai = options[0]
-    elif (ai_option == 1):
+    elif(ai_option == 1):
         ai = options[1]
     else:
         ai = options[2]
