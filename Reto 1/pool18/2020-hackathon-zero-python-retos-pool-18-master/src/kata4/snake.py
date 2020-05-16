@@ -19,26 +19,32 @@ class Snake():
     # Vertical      -> Movimientos [RIGHT - LEFT]
     # Horizontal    -> Movimientos [UP - DOWN]
     # Incremento del movimiento 
+    if event.type == pygame.KEYDOWN:
+		if event.key == pygame.K_UP:
+		    self.direction = "UP" 
+		if event.key == pygame.K_DOWN:
+			self.direction = "DOWN" 
+        if event.key == pygame.K_LEFT:
+		    self.direction = "LEFT" 
+        if event.key == pygame.K_RIGHT:
+		    self.direction = "RIGHT" 
+
     def changeDirection(self):
         #
+        if self.change == "RIGHT":
+            self.position[0] = self.position[0] + 1
+            self.position[0] = self.position[0] + 1
+            self.body.insert(0, list(self.position))    
+        elif self.change == "LEFT":
+            self.position[0] = self.position[0] - 1
+            self.body.insert(0, list(self.position))
+        elif self.change == "UP":
+            self.position[1] = self.position[1] + 1
+            self.body.insert(0, list(self.position))
+        else: 
+            self.position[1] = self.position[1] - 1
+            self.body.insert(0, list(self.position))
         #
-        #
-        #
-        #
-        #
-        #
-        #
-
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-
-        self.body.insert(0, list(self.position))
 
 class Game():
     run = True
@@ -51,19 +57,21 @@ class Game():
     # función de salida
     def exit(self, event, pygame):
         #
-        #
+        pygame.quit()
+        self.exit()
     
     # Posición aleatorio entre el ranto [0,49] * 10  
     def food_spawn(self):
-        self.food_pos = 0
+        food_pos_x = 10 * random.choice((0,49))
+        food_pos_y = 10 * random.choice((0,49))
+        self.food_pos = [food_pos_x,food_pos_y]
 
     # Si colisionas con una fruta, sumas 1
     # Sino decrementas en 1 el body del snake
     def eat(self, snake):
         #
-        #    
-        #    
-        #
+        if((snake.position[0] == self.food_pos[0]) and (snake.position[1] == self.food_pos[1])):
+            snake.body
         #  
 
     # Mensajes de salida cuando el snake muere
@@ -98,8 +106,10 @@ def main():
     # Bucle principal
     while game.run:
         for event in pygame.event.get():
-            game.exit(event, pygame)
-            snake.controller(event, pygame)
+            if event.type == pygame.QUIT:
+			    game.exit(event, pygame)
+            else:
+                snake.controller(event, pygame)
         
         snake.changeDirection()
 
